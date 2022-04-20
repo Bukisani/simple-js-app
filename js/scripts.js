@@ -6,16 +6,9 @@ let pokemonList = [
   { name: 'Raticate', height: 0.7, types: ['field'] },
   { name: 'Nidoking', height: 1.4, types: ['monster', 'field'] },
 ];
-// the for loop iterates over each item in the pokemonList
-for (let i = 0; i < pokemonList.length; i++) {
-  //Condition that checks if the height is greater than 1
-  if (pokemonList[i].height > 1) {
-    document.write(
-      `${pokemonList[i].name} (height:${pokemonList[i].height}) Wow, that\'s big!<br> `
-    );
-  } else {
-    document.write(
-      `${pokemonList[i].name} (height:${pokemonList[i].height})<br> `
-    );
-  }
-}
+// the foreach loop iterates over each item in the pokemonList
+pokemonList.forEach((pokemon) => {
+  document.write(
+    `<p><b>Name</b>:${pokemon.name}  <b>Type:</b>${pokemon.types} <b>height:</b> ${pokemon.height}</p>`
+  );
+});
