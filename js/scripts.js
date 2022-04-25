@@ -15,22 +15,30 @@ let pokemonRepository = (function () {
   function add(pokemon) {
     pokemonList.push(pokemon);
   }
+  function addListItem(pokemon) {
+    let pokemonContainer = document.querySelector('.pokemon-list');
+    let listItem = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('pokemonBtn');
+    listItem.appendChild(button);
+    pokemonContainer.appendChild(listItem);
+
+    button.addEventListener('click', showDetails);
+  }
+  //function that displays the pokemom name
+  function showDetails() {
+    console.log(this.innerText);
+  }
   return {
     getAll: getAll,
     add: add,
+    addListItem: addListItem,
   };
 })();
 
 pokemonRepository.add({ name: 'Hypno', height: 1.6, types: ['Human-like'] });
 // for each loop that displays the pokemons
 pokemonRepository.getAll().forEach((pokemon) => {
-  document.write(
-    `<p><b>Name</b>:${pokemon.name}  <b>Type:</b>${pokemon.types} <b>height:</b> ${pokemon.height}</p>`
-  );
+  pokemonRepository.addListItem(pokemon);
 });
-
-// trying to be adventurous ......filters greater than 0.7 Pokemons and writes in the console
-const result = pokemonRepository
-  .getAll()
-  .filter((pokemon) => pokemon.name === 'Beedrill');
-console.log(result);
