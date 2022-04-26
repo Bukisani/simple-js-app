@@ -24,11 +24,13 @@ let pokemonRepository = (function () {
     listItem.appendChild(button);
     pokemonContainer.appendChild(listItem);
 
-    button.addEventListener('click', showDetails);
+    button.addEventListener('click', function () {
+      showDetails(pokemon);
+    });
   }
   //function that displays the pokemom name
-  function showDetails() {
-    console.log(this.innerText);
+  function showDetails(pokemon) {
+    console.log(pokemon.name);
   }
   return {
     getAll: getAll,
