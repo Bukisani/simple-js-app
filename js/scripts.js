@@ -1,13 +1,8 @@
 // IIFE that wraps the pokemonList
 
 let pokemonRepository = (function () {
-  let pokemonList = [
-    { name: 'Harmander', height: 0.6, types: ['monster', 'dragon'] },
-    { name: 'Squirtle', height: 0.5, types: ['monster', 'water'] },
-    { name: 'Beedrill', height: 1, types: ['bug'] },
-    { name: 'Raticate', height: 0.7, types: ['field'] },
-    { name: 'Nidoking', height: 1.4, types: ['monster', 'field'] },
-  ];
+  let pokemonList = [];
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   function getAll() {
     return pokemonList;
@@ -28,19 +23,62 @@ let pokemonRepository = (function () {
       showDetails(pokemon);
     });
   }
-  //function that displays the pokemom name
-  function showDetails(pokemon) {
-    console.log(pokemon.name);
+
+  function loadList() {
+    return fetch(apiUrl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (json) {
+        json.results.forEach(function (item) {
+          let pokemon = {
+            name: item.name,
+            detailsUrl: item.url,
+          };
+          add(pokemon);
+          console.log(pokemon);
+        });
+      })
+      .catch(function (e) {
+        console.error(e);
+      });
+  }
+
+  function loadDetails(item) {
+    let url = item.detailsUrl;
+    return fetch(url)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (details) {
+        // Now we add the details to the item
+        item.imageUrl = details.sprites.front_default;
+        item.height = details.height;
+        item.types = details.types;
+      })
+      .catch(function (e) {
+        console.error(e);
+      });
+  }
+  //function that displays the pokemom details
+  function showDetails(item) {
+    loadDetails(item).then(function () {
+      console.log(item);
+    });
   }
   return {
     getAll: getAll,
     add: add,
     addListItem: addListItem,
+    loadList: loadList,
+    loadDetails,
+    loadDetails,
   };
 })();
 
-pokemonRepository.add({ name: 'Hypno', height: 1.6, types: ['Human-like'] });
 // for each loop that displays the pokemons
-pokemonRepository.getAll().forEach((pokemon) => {
-  pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function () {
+  pokemonRepository.getAll().forEach((pokemon) => {
+    pokemonRepository.addListItem(pokemon);
+  });
 });
