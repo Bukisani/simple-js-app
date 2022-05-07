@@ -3,7 +3,7 @@
   height: 70px;
 }
 .pokemonBtn {
-  background-color: #333;
+  background-color: rgba(0, 0, 0, 0.672);
   border: none;
   color: white;
   padding: 15px 32px;
@@ -24,4 +24,7 @@
 }
 .modalStyle {
   border: 8px solid goldenrod;
+}
+.modalHeader {
+  background-color: blanchedalmond;
 }
