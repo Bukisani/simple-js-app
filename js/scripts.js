@@ -11,81 +11,59 @@ let pokemonRepository = (function () {
     pokemonList.push(pokemon);
   }
   function addListItem(pokemon) {
-    let pokemonContainer = document.querySelector('.pokemon-list');
-    let listItem = document.createElement('li');
-    let button = document.createElement('button');
-    button.innerText = pokemon.name;
-    button.classList.add('pokemonBtn');
-    listItem.appendChild(button);
-    pokemonContainer.appendChild(listItem);
+    let pokemonContainer = $('.pokemon-list');
+    let listItem = $('<div></div>');
 
-    button.addEventListener('click', function () {
+    let button = $(
+      '<button type="button" class="btn " data-toggle="modal" data-target="#exampleModal"></button>'
+    );
+    button.append(pokemon.name);
+    button.addClass('pokemonBtn');
+    listItem.append(button);
+    // listItem.addClass('col-sm-4');
+    pokemonContainer.append(listItem);
+
+    button.on('click', function (event) {
       showDetails(pokemon);
     });
   }
 
   //function for creating a modal
   function showModal(pokemon) {
-    let modalContainer = document.querySelector('#modal-container');
-    // Clearing all existing modal content
-    modalContainer.innerHTML = '';
-    let overallContainer = document.querySelector('.container'); //to remove
-    let modal = document.createElement('div');
-    modal.classList.add('modal');
+    let modalBody = $('.modal-body');
+    let modalTitle = $('.modal-title');
+    let modalHeader = $('.modal-header');
 
-    // Add the new modal content
-    let closeButtonElement = document.createElement('button');
-    closeButtonElement.classList.add('modal-close');
-    closeButtonElement.innerText = 'Close';
-    closeButtonElement.addEventListener('click', hideModal);
+    //clear existing content of the model
 
-    let titleElement = document.createElement('h1');
-    titleElement.innerText = pokemon.name;
+    modalTitle.empty();
+    modalBody.empty();
 
-    // loading the images through the url
-    let imageElement = document.createElement('img');
-    imageElement.classList.add('pokemonImage');
-    imageElement.src = pokemon.imageUrl;
+    //creating element for name in modal content
+    let nameElement = $('<h1>' + pokemon.name + '</h1>');
 
-    //height of the pokemon
-    let heightElement = document.createElement('h3');
-    heightElement.innerText = `Height:  ${pokemon.height}`;
+    //  creating img in modal content
+    let imageElementFront = $('<img class="modal-img" style="width:50%">');
+    imageElementFront.attr('src', pokemon.imageUrl);
+    let imageElementBack = $('<img class="modal-img" style="width:50%">');
 
-    // weight of the pokemon
-    let weightElement = document.createElement('h3');
-    weightElement.innerText = ` Weight:  ${pokemon.weight}`;
+    // creating element for height in modal content
+    let heightElement = $('<h3>' + 'height : ' + pokemon.height + '</h3>');
 
-    //appending all the elements  inside the modal container
-    modal.appendChild(closeButtonElement);
-    modal.appendChild(titleElement);
-    modal.appendChild(imageElement);
-    modal.appendChild(heightElement);
-    modal.appendChild(weightElement);
-    modalContainer.appendChild(modal);
+    // creating element for weight in modal content
+    let weightElement = $('<h3>' + 'weight : ' + pokemon.weight + '</h3>');
 
-    modalContainer.classList.add('is-visible');
-  }
-
-  //hiding the modal by using the escape key
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      hideModal();
-    }
-  });
-
-  // function to hide the modal
-  function hideModal() {
-    let modalContainer = document.querySelector('#modal-container');
-    modalContainer.classList.remove('is-visible');
+    //appending all the elements  inside their containers
+    modalTitle.append(nameElement);
+    modalBody.append(imageElementFront);
+    modalBody.append(heightElement);
+    modalBody.append(weightElement);
   }
 
   //fetching the pokemon details (API)
 
   function loadList() {
-    return fetch(apiUrl)
-      .then(function (response) {
-        return response.json();
-      })
+    return $.ajax(apiUrl)
       .then(function (json) {
         json.results.forEach(function (item) {
           let pokemon = {
@@ -102,10 +80,7 @@ let pokemonRepository = (function () {
 
   function loadDetails(item) {
     let url = item.detailsUrl;
-    return fetch(url)
-      .then(function (response) {
-        return response.json();
-      })
+    return $.ajax(url)
       .then(function (details) {
         // Now we add the details to the item
         item.imageUrl = details.sprites.front_default;
