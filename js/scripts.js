@@ -20,7 +20,7 @@ let pokemonRepository = (function () {
     button.append(pokemon.name);
     button.addClass('pokemonBtn');
     listItem.append(button);
-    // listItem.addClass('col-sm-4');
+    listItem.addClass('group-list-item');
     pokemonContainer.append(listItem);
 
     button.on('click', function (event) {
@@ -113,5 +113,21 @@ let pokemonRepository = (function () {
 pokemonRepository.loadList().then(function () {
   pokemonRepository.getAll().forEach((pokemon) => {
     pokemonRepository.addListItem(pokemon);
+  });
+});
+
+//displays searched values (i'm super proud of this lol)
+
+$('#myInput').keyup(function (event) {
+  let myInput = $('input').val().toLowerCase();
+  $('.group-list-item').each((i, pokemon) => {
+    if (
+      myInput === '' ||
+      $(pokemon).text().toLowerCase().indexOf(myInput) > -1
+    ) {
+      $(pokemon).show();
+    } else {
+      $(pokemon).hide();
+    }
   });
 });
