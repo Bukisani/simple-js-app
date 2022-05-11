@@ -35,6 +35,7 @@ If you have any suggestions that would make this better, please fork the repo an
 ## Contact
 
 [Bukisani](https://www.linkedin.com/in/bukisani-tshuma-323929237/)
+<br>
 [Project link](https://bukisani.github.io/simple-js-app/?)
 
 ## Acknowledgements
@@ -42,4 +43,4 @@ If you have any suggestions that would make this better, please fork the repo an
 - [Pokemon API](https://pokeapi.co/)
 - [Font Awesome](https://fontawesome.com)
 - [GitHub Pages](https://pages.github.com)
-- [Careerfoundry](hhttps://careerfoundry.com/)
+- [Careerfoundry](https://careerfoundry.com)
