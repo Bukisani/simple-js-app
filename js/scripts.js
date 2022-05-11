@@ -35,7 +35,6 @@ let pokemonRepository = (function () {
     let modalHeader = $('.modal-header');
 
     //clear existing content of the model
-
     modalTitle.empty();
     modalBody.empty();
 
@@ -61,7 +60,6 @@ let pokemonRepository = (function () {
   }
 
   //fetching the pokemon details (API)
-
   function loadList() {
     return $.ajax(apiUrl)
       .then(function (json) {
@@ -117,7 +115,6 @@ pokemonRepository.loadList().then(function () {
 });
 
 //displays searched values (i'm super proud of this lol)
-
 $('#myInput').keyup(function (event) {
   let myInput = $('input').val().toLowerCase();
   $('.group-list-item').each((i, pokemon) => {
