@@ -7,6 +7,8 @@ The app loads and presents data from an external API using jQuery
 The user can view Pokemon details by clicking on the Pokemon name which opens a modal with with pokemon details.
 The user can also search for specific Pokemon buy using the search input box.
 
+[<img align="" alt="Pokedex" src="./img/pokedex.gif" />]
+
 ## Built with
 
 The languages and tool I used for this project are:
@@ -19,7 +21,7 @@ The languages and tool I used for this project are:
 
 ## RoadMap
 
-- [x] Add a search
+- [x] Add a search functionality
 - [ ] Add loading Indicators
 - [ ] User friendly error handling features
 
