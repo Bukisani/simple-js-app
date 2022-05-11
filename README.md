@@ -37,7 +37,6 @@ If you have any suggestions that would make this better, please fork the repo an
 ## Contact
 
 [Bukisani](https://www.linkedin.com/in/bukisani-tshuma-323929237/)
-
 <br>
 
 [Project link](https://bukisani.github.io/simple-js-app/?)
